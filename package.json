@@ -1,0 +1,24 @@
+{
+    "name": "mckevins",
+    "version": "1.0.0",
+    "scripts": {
+        "client": "cd client && yarn start",
+        "server": "cd server && nodemon server.js",
+        "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+        "start": "cd server && node server.js",
+        "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    },
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "express": "^4.16.2",
+        "module-alias": "^2.1.0",
+        "mongoose": "^5.2.6",
+        "react-facebook-login": "^4.0.1"
+    },
+    "devDependencies": {
+        "concurrently": "^3.5.0"
+    },
+    "_moduleAliases": {
+        "@models": "server/models"
+    }
+}
