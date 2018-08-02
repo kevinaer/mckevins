@@ -2,6 +2,7 @@
     "name": "mckevins",
     "version": "1.0.0",
     "scripts": {
+        "lint": "eslint -c .eslintrc.json server/ client/src",
         "client": "cd client && yarn start",
         "server": "cd server && nodemon server.js",
         "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
@@ -16,7 +17,14 @@
         "react-facebook-login": "^4.0.1"
     },
     "devDependencies": {
-        "concurrently": "^3.5.0"
+        "babel-eslint": "^8.2.6",
+        "concurrently": "^3.5.0",
+        "eslint": "^4.19.1",
+        "eslint-config-airbnb": "^17.0.0",
+        "eslint-loader": "^2.1.0",
+        "eslint-plugin-import": "^2.13.0",
+        "eslint-plugin-jsx-a11y": "^6.1.1",
+        "eslint-plugin-react": "^7.10.0"
     },
     "_moduleAliases": {
         "@models": "server/models"

@@ -1,4 +1,6 @@
+/* eslint-env node */
 require('module-alias/register');
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -20,9 +22,7 @@ const mongoDB = 'mongodb://127.0.0.1/mckevins';
 mongoose.connect(mongoDB);
 
 mongoose.Promise = global.Promise;
-const db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'MongoDB connection mishap :( :'));
+// db.on('error', console.error.bind(console, 'MongoDB connection mishap :( :'));
 
 if (process.env.NODE_ENV === 'production') {
     // Serve any static files
@@ -33,4 +33,5 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+// app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port);
