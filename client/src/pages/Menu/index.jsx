@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
-import logo from './logo.svg';
-import './App.css';
 
-class App extends Component {
+class Menu extends Component {
     constructor(props) {
         super(props);
         this.state = { };
@@ -35,12 +33,6 @@ class App extends Component {
         const { user } = this.state;
         return (
             <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h1 className="App-title">
-                        Welcome to React
-                    </h1>
-                </header>
                 <FacebookLogin
                   appId="371809906684685"
                   autoLoad
@@ -60,4 +52,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default Menu;

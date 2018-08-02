@@ -10,7 +10,10 @@
         "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
         "precommit-msg": "echo 'Pre-commit linting...' && exit 0"
     },
-    "pre-commit": ["precommit-msg", "lint"],
+    "pre-commit": [
+        "precommit-msg",
+        "lint"
+    ],
     "dependencies": {
         "body-parser": "^1.18.3",
         "express": "^4.16.2",
@@ -27,13 +30,14 @@
         "eslint-loader": "^2.1.0",
         "eslint-plugin-import": "^2.13.0",
         "eslint-plugin-jsx-a11y": "^6.1.1",
-        "eslint-plugin-react": "^7.10.0"
+        "eslint-plugin-react": "^7.10.0",
+        "pre-commit": "^1.2.2"
     },
     "eslintIgnore": [
         "client/src/registerServiceWorker.js",
         "client/node_modules"
     ],
     "_moduleAliases": {
-        "models": "server/models"
+        "models": "server/models",
     }
 }
