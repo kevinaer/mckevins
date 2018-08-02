@@ -2,10 +2,10 @@
     "name": "mckevins",
     "version": "1.0.0",
     "scripts": {
-        "lint": "eslint -c .eslintrc.json server/ client/src",
+        "lint": "eslint --ext .jsx --ext .js -c .eslintrc.json server client",
         "client": "cd client && yarn start",
         "server": "cd server && nodemon server.js",
-        "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+        "dev": "concurrently --kill-others-on-fail \"yarn start\" \"yarn client\"",
         "start": "cd server && node server.js",
         "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
     },
@@ -21,12 +21,17 @@
         "concurrently": "^3.5.0",
         "eslint": "^4.19.1",
         "eslint-config-airbnb": "^17.0.0",
+        "eslint-import-resolver-alias": "^1.1.1",
         "eslint-loader": "^2.1.0",
         "eslint-plugin-import": "^2.13.0",
         "eslint-plugin-jsx-a11y": "^6.1.1",
         "eslint-plugin-react": "^7.10.0"
     },
+    "eslintIgnore": [
+        "client/src/registerServiceWorker.js",
+        "client/node_modules"
+    ],
     "_moduleAliases": {
-        "@models": "server/models"
+        "models": "server/models"
     }
 }

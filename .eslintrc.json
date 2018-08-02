@@ -8,7 +8,6 @@
     "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
-            "experimentalObjectRestSpread": true,
             "jsx": true
         },
         "ecmaVersion": 6,
@@ -20,7 +19,8 @@
     "rules": {
         "indent": [
             "error",
-            4
+            4,
+            { "ignoredNodes": ["JSXElement *"] }
         ],
         "linebreak-style": [
             "error",
@@ -30,9 +30,26 @@
             "error",
             "single"
         ],
+        "react/jsx-indent": "off",
+        "react/jsx-filename-extension": [
+            1, 
+            { 
+                "extensions": [".js", ".jsx"] 
+            }
+        ],
         "semi": [
             "error",
             "always"
         ]
+    },
+    "settings": {
+        "import/resolver": {
+            "alias": {
+                "map": [
+                    ["models", "./server/models"]
+                ],
+                "extensions": [".js", ".jsx", ".json"]
+            }
+        }
     }
 }
