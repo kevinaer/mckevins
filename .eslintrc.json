@@ -46,7 +46,7 @@
         "import/resolver": {
             "alias": {
                 "map": [
-                    ["models", "./server/models"],
+                    ["server", "./server"],
                     ["pages", "./client/src/pages"],
                     ["routes", "./client/src/routes"]
                 ],
