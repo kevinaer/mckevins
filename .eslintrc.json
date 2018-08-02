@@ -47,7 +47,8 @@
             "alias": {
                 "map": [
                     ["models", "./server/models"],
-                    ["pages", "./client/src/pages"]
+                    ["pages", "./client/src/pages"],
+                    ["routes", "./client/src/routes"]
                 ],
                 "extensions": [".js", ".jsx", ".json"]
             }

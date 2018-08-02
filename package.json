@@ -38,6 +38,6 @@
         "client/node_modules"
     ],
     "_moduleAliases": {
-        "models": "server/models",
+        "models": "server/models"
     }
 }
