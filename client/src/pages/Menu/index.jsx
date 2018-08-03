@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 
 import NavBar from 'components/Navbar';
+import MenuItem from 'components/MenuItem';
 
 const styles = theme => ({
     menu: {
@@ -12,6 +13,8 @@ const styles = theme => ({
         marginTop: theme.mixins.toolbar.minHeight + theme.spacing.unit * 2,
     },
 });
+
+const IMAGE = 'https://www.habitburger.com/wp-content/themes/habitburger/images/slider_charburger.png';
 
 class Menu extends Component {
     constructor(props) {
@@ -56,6 +59,11 @@ class Menu extends Component {
                             <img src={`${user.url}`} alt="profile" />
                         </div>
                     )}
+                    <MenuItem 
+                      title="Burger"
+                      description="Muh burgers lololol"
+                      image={IMAGE}
+                    />
                 </Paper>
                 <FacebookLogin
                   appId="371809906684685"

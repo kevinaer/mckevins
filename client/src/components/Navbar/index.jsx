@@ -11,20 +11,18 @@ const styles = {
     },
 };
 
-function NavBar(props) {
-    const { classes } = props;
-    return (
-        <div className={classes.root}>
-        <AppBar position="fixed" color="default">
-            <Toolbar>
-            <Typography variant="title" color="inherit">
-                {'McKevin\'s Menu'}
-            </Typography>
-            </Toolbar>
-        </AppBar>
-        </div>
-    );
-}
+const NavBar = ({ classes }) => (
+    <div className={classes.root}>
+    <AppBar position="fixed" color="default">
+        <Toolbar>
+        <Typography variant="title" color="inherit">
+            {'McKevin\'s Menu'}
+        </Typography>
+        </Toolbar>
+    </AppBar>
+    </div>
+);
+
 
 NavBar.propTypes = {
     classes: PropTypes.shape({
