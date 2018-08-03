@@ -4,9 +4,12 @@ import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 
+import NavBar from 'components/Navbar';
+
 const styles = theme => ({
     menu: {
         padding: theme.spacing.unit,
+        marginTop: theme.mixins.toolbar.minHeight + theme.spacing.unit * 2,
     },
 });
 
@@ -43,6 +46,7 @@ class Menu extends Component {
         const { classes } = this.props;
         return (
             <div>
+                <NavBar />
                 <Paper className={classes.menu}>
                     {user && (
                         <div>

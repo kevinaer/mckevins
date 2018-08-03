@@ -48,7 +48,8 @@
                 "map": [
                     ["server", "./server"],
                     ["pages", "./client/src/pages"],
-                    ["routes", "./client/src/routes"]
+                    ["routes", "./client/src/routes"],
+                    ["components", "./client/src/components"]
                 ],
                 "extensions": [".js", ".jsx", ".json"]
             }
