@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
 import FacebookLogin from 'react-facebook-login';
+import PropTypes from 'prop-types';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+    menu: {
+        padding: theme.spacing.unit,
+    },
+});
 
 class Menu extends Component {
     constructor(props) {
@@ -31,25 +40,34 @@ class Menu extends Component {
 
     render() {
         const { user } = this.state;
+        const { classes } = this.props;
         return (
-            <div className="App">
+            <div>
+                <Paper className={classes.menu}>
+                    {user && (
+                        <div>
+                            <h1>
+                                {user.name}
+                            </h1>
+                            <img src={`${user.url}`} alt="profile" />
+                        </div>
+                    )}
+                </Paper>
                 <FacebookLogin
                   appId="371809906684685"
                   autoLoad
                   fields="name,picture"
                   callback={this.responseFacebook}
                 />
-                {user && (
-                    <div>
-                        <h1>
-                            {user.name}
-                        </h1>
-                        <img src={`${user.url}`} alt="profile" />
-                    </div>
-                )}
             </div>
         );
     }
 }
 
-export default Menu;
+Menu.propTypes = {
+    classes: PropTypes.shape({
+        menu: PropTypes.string,
+    }).isRequired,
+};
+
+export default withStyles(styles)(Menu);
