@@ -59,7 +59,7 @@ class Menu extends Component {
                             <img src={`${user.url}`} alt="profile" />
                         </div>
                     )}
-                    <MenuItem 
+                    <MenuItem
                       title="Burger"
                       description="Muh burgers lololol"
                       image={IMAGE}

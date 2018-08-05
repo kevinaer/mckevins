@@ -15,30 +15,34 @@ const styles = theme => ({
     },
     heading: {
         margin: theme.spacing.unit * 2,
-    }
+    },
 });
 
-const MenuItem = ({title, description, image, classes}) => (
+const MenuItem = ({
+    title,
+    description,
+    image,
+    classes,
+}) => (
     <div>
         <Card>
             <Grid container spacing={24}>
                 <Grid item xs={6}>
-                    {
-                        console.log(classes.heading)
-                    }
                     <CardContent>
-                        <Typography 
+                        <Typography
                           variant="headline"
                           classnames={classes.heading}
                         >
                             {title}
                         </Typography>
                         <Divider />
-                        <Typography variant="body1">{description}</Typography>
+                        <Typography variant="body1">
+                          {description}
+                        </Typography>
                     </CardContent>
                 </Grid>
                 <Grid item xs={6}>
-                    <CardMedia 
+                    <CardMedia
                       image={image}
                       title={title}
                       className={classes.image}
@@ -48,5 +52,16 @@ const MenuItem = ({title, description, image, classes}) => (
         </Card>
     </div>
 );
+
+MenuItem.propTypes = {
+    classes: PropTypes.shape({
+        image: PropTypes.string,
+        heading: PropTypes.string,
+    }).isRequired,
+    description: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+};
+
 
 export default withStyles(styles)(MenuItem);
