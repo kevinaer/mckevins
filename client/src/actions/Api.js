@@ -26,11 +26,11 @@ class Api {
     }
 
     post(path, body) {
-        return dispatch => this.request(path, { method: 'POST', body, headers: this.headers }, dispatch);
+        return dispatch => this.request(path, { method: 'POST', body: JSON.stringify(body), headers: this.headers }, dispatch);
     }
 
     put(path, body) {
-        return dispatch => this.request(path, { method: 'PUT', body, headers: this.headers }, dispatch);
+        return dispatch => this.request(path, { method: 'PUT', body: JSON.stringify(body), headers: this.headers }, dispatch);
     }
 
     delete(path) {

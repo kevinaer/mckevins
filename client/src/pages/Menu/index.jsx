@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import FacebookLogin from 'react-facebook-login';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
-import NavBar from 'components/Navbar';
-import MenuItem from 'components/MenuItem';
 import MenuApi from 'actions/api/MenuActions';
-import { Typography } from '@material-ui/core';
+import LoginModal from 'components/LoginModal';
+import MenuItem from 'components/MenuItem';
 
 const styles = theme => ({
     menu: {
@@ -31,22 +30,10 @@ class Menu extends Component {
         onGetMenu();
     }
 
-    // responseFacebook = async (response) => {
-    //     const user = await fetch('/api/login/', {
-    //         method: 'POST',
-    //         headers: {
-    //             Accept: 'application/json',
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(response),
-    //     }).then(res => res.json());
-    //     this.setState({ user });
-    // }
-
     renderCategory(category) {
         const { menu } = this.props;
 
-        return menu.menu.filter(item => item.category === category)
+        return menu.filter(item => item.category === category)
             .map(item => (
                 <MenuItem
                   title={item.name}
@@ -58,7 +45,6 @@ class Menu extends Component {
 
     renderMenuItems() {
         const { classes } = this.props;
-
         return (
             <div>
                 <div className={classes.group}>
@@ -78,21 +64,15 @@ class Menu extends Component {
     }
 
     render() {
-        const { classes, menu } = this.props;
+        const { classes, menuLoaded } = this.props;
         return (
             <div>
-                <NavBar />
+                <LoginModal />
                 <div className={classes.menu}>
                     {
-                        menu.success && this.renderMenuItems()
+                        menuLoaded && this.renderMenuItems()
                     }
                 </div>
-                <FacebookLogin
-                  appId="371809906684685"
-                  autoLoad
-                  fields="name,picture"
-                  callback={this.responseFacebook}
-                />
             </div>
         );
     }
@@ -102,12 +82,13 @@ Menu.propTypes = {
     classes: PropTypes.shape({
         menu: PropTypes.string,
     }).isRequired,
-    menu: PropTypes.shape({
-        success: PropTypes.bool,
-        pending: PropTypes.bool,
-        error: PropTypes.string,
-        menu: PropTypes.array,
-    }).isRequired,
+    menu: PropTypes.arrayOf({
+        name: PropTypes.string,
+        description: PropTypes.string,
+        category: PropTypes.string,
+        imageUrl: PropTypes.string,
+    }),
+    menuLoaded: PropTypes.bool.isRequired,
     onGetMenu: PropTypes.func.isRequired,
 };
 
@@ -116,9 +97,12 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = (state) => {
-    const { menu } = state.menu;
+    const { menu } = state.menuApi;
+    const { user } = state.loginApi;
     return {
         menu,
+        menuLoaded: state.menuApi.success,
+        user,
     };
 };
 
