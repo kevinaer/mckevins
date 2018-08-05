@@ -10,29 +10,31 @@ class Api {
         this.headers = headers;
     }
 
-    request = async (path = '', options) => (dispatch) => {
+    async request(path = '', options, dispatch) {
         dispatch({ type: this.API_PENDING });
         try {
-            fetch(`${this.URL}/${path}`, options).then(data => dispatch({ type: this.API_SUCCESS, data }));
+            return fetch(`${this.URL}/${path}`, options)
+                .then(res => res.json())
+                .then(data => dispatch({ type: this.API_SUCCESS, data }));
         } catch (error) {
-            dispatch({ type: this.API_ERROR, error });
+            return dispatch({ type: this.API_ERROR, error });
         }
     }
 
     get(path) {
-        return this.request(path, { method: 'GET', headers: this.headers });
+        return dispatch => this.request(path, { method: 'GET', headers: this.headers }, dispatch);
     }
 
     post(path, body) {
-        return this.request(path, { method: 'POST', body, headers: this.headers });
+        return dispatch => this.request(path, { method: 'POST', body, headers: this.headers }, dispatch);
     }
 
     put(path, body) {
-        return this.request(path, { method: 'PUT', body, headers: this.headers });
+        return dispatch => this.request(path, { method: 'PUT', body, headers: this.headers }, dispatch);
     }
 
     delete(path) {
-        return this.request(path, { method: 'DELETE', headers: this.headers });
+        return dispatch => this.request(path, { method: 'DELETE', headers: this.headers }, dispatch);
     }
 }
 

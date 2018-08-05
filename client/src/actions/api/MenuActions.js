@@ -6,4 +6,4 @@ class MenuApi extends Api {
     }
 }
 
-export default MenuApi('MENU_API', 'api/menu');
+export default new MenuApi('MENU_API', 'api/menu');

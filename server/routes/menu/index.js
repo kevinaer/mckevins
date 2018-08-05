@@ -14,13 +14,13 @@ router.post('/menuItem', (req, res) => {
         if (object) {
             res.send(object);
         } else {
-            res.status(404).send('Cannot create user');
+            res.status(404).send('Cannot create menu item');
         }
     });
 });
 
 router.get('/menu', (req, res) => {
-    menuItem.find({}, (err, menu) => res.send({ menu }));
+    menuItem.find({}, (err, menu) => res.send(menu));
 });
 
 module.exports = router;

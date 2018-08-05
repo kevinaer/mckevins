@@ -7,7 +7,7 @@ const CATEGORY = ['main', 'sides'];
 const MenuItemSchema = new Schema({
     name: String,
     description: String,
-    catergory: {
+    category: {
         type: String,
         lowercase: true,
         enum: CATEGORY,
