@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 
 app.use('/api', routes);
 
-const mongoDB = 'mongodb://127.0.0.1/mckevins';
+const mongoDB = 'mongodb://dev:passw0rd@ds215172.mlab.com:15172/mckevins';
 mongoose.connect(mongoDB);
 
 mongoose.Promise = global.Promise;

@@ -18,21 +18,10 @@ $ sudo apt-get install nodejs
 $ sudo apt-get install npm
 ```
 
-### Yarn
-#### Mac
-```
-$ brew install yarn
-```
-
-### Node
-```
-$ npm install -g yarn
-```
-
 ## Commands for development
 
 ### Linting
-To lint at any point run `yarn lint`. Linting will occur before every commit. 
+To lint at any point run `npm run lint`. Linting will occur before every commit. 
 
-### Starting up
-To start the server and client run `yarn dev`.
+### Starting up dev server
+To start the server and client run `npm run dev`.
