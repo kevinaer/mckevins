@@ -42,13 +42,16 @@ Here are a few useful links for if you need to learn some skills before starting
 
 -[Medium's quick guide to writing unit tests with jest and enzyme](https://medium.com/wehkamp-techblog/unit-testing-your-react-application-with-jest-and-enzyme-81c5545cee45)
 
+### Got A Cool Idea?
+Submit a (feature request)[https://github.com/kevinaer/mckevins/issues/new?template=feature_request.md] and under the comments section @kevinaer and I will take a look at it! Open to new/better solutions and improvements to the McKevin's App! 
+
 ## Commands for development
 
 ### Linting
 To lint at any point run `npm run lint`. Linting will occur before every commit. 
 
 ### Starting up dev server
-To start the server and client run `npm run dev`.
+ To start the server and client run `npm run dev`. Make sure Mongo is running!
 
 ### Submitting your changes
 In order to contribute, you must submit a pull request to be reviewed. This is a way of making sure that master isn't fucked by a bad commit or something.
