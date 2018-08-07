@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { CookiesProvider } from 'react-cookie';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
@@ -14,11 +15,13 @@ const rootReducers = combineReducers({ menuApi, loginApi });
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware));
 
 ReactDOM.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <Routes />
-        </BrowserRouter>
-    </Provider>,
+    <CookiesProvider>
+        <Provider store={store}>
+            <BrowserRouter>
+                <Routes />
+            </BrowserRouter>
+        </Provider>
+    </CookiesProvider>,
     document.getElementById('root'),
 );
 

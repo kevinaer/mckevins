@@ -1,11 +1,14 @@
 const express = require('express');
 const User = require('server/models/user');
+const Cookies = require('universal-cookie');
 
 const router = express.Router();
 
 router.post('/login', (req, res) => {
+    const cookies = new Cookies();
     User.findById(req.body.id, (findErr, query) => {
         if (query) {
+            cookies.set('name', query, { maxAge: 86400, secure: true });
             res.send(query);
         } else {
             User.create({
@@ -15,6 +18,7 @@ router.post('/login', (req, res) => {
                 accessToken: req.body.accessToken,
             }, (createErr, object) => {
                 if (object) {
+                    cookies.set('name', object, { maxAge: 86400, secure: true });
                     res.send(object);
                 } else {
                     res.status(404).send('Cannot retrieve user');
