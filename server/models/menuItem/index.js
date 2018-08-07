@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const CATEGORY = ['main', 'sides'];
+const CATEGORY = ['main', 'sides', 'drinks', 'sweets'];
 
 const MenuItemSchema = new Schema({
     name: String,
