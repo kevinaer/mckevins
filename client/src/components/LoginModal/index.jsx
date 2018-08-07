@@ -13,7 +13,7 @@ import LoginApi from 'actions/api/LoginActions';
 
 const styles = theme => ({
     modal: {
-        top: '20rem',
+        top: '10rem',
         margin: 'auto',
         width: '50%',
     },

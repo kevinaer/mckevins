@@ -87,7 +87,7 @@ Menu.propTypes = {
         description: PropTypes.string,
         category: PropTypes.string,
         imageUrl: PropTypes.string,
-    }),
+    }).isRequired,
     menuLoaded: PropTypes.bool.isRequired,
     onGetMenu: PropTypes.func.isRequired,
 };

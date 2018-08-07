@@ -24,7 +24,7 @@ const MenuItem = ({
     classes,
 }) => (
     <div>
-        <Card>
+        <Card className={classes.container}>
             <Grid container spacing={24}>
                 <Grid item xs={8}>
                     <CardContent>
