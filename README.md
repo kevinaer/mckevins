@@ -19,8 +19,28 @@ $ sudo apt-get install nodejs
 $ sudo apt-get install npm
 ```
 
+### MongoDB (for local tests)
+Just follow the link [here](https://docs.mongodb.com/manual/installation/) to install based on your computer.
+
 ## Where to start?
 Go to the issues tab in the github main page. Find an issue you like and just post in it to claim! However an issue will be up for grabs if you don't work on it.
+
+### Useful links
+Here are a few useful links for if you need to learn some skills before starting. If you find other useful links, feel free to let me know or create a PR!
+
+-[TutorialsPoint tutorial for express for learning how to create routes](https://www.tutorialspoint.com/expressjs/index.html)
+
+-[Scotchio's mongoose tutorial for learning how to work with MongoDB and create/use models](https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications)
+
+-[React's tutorial for learning the basics of react](https://reactjs.org/tutorial/tutorial.html)
+
+-[Scotchio's react-redux tutorial for learning actions and reducers](https://scotch.io/tutorials/build-a-bookshop-with-react-redux-i-react-redux-flow)
+
+-[Material-ui's docs for learning how to create bootstrap'd react components](https://material-ui.com/)
+
+-[Jest's docs for learning how to write unit tests in jest](https://jestjs.io/docs/en/getting-started)
+
+-[Medium's quick guide to writing unit tests with jest and enzyme](https://medium.com/wehkamp-techblog/unit-testing-your-react-application-with-jest-and-enzyme-81c5545cee45)
 
 ## Commands for development
 
