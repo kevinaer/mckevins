@@ -4,8 +4,9 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema({
     name: String,
-    _id: Number,
+    _id: String,
     url: String,
+    isAdmin: { type: Boolean, default: false },
     accessToken: String,
     isAdmin: { type: Boolean, default: false },
 });

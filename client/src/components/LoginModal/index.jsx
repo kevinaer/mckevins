@@ -34,6 +34,9 @@ const LoginModal = ({
 }) => (
     <Modal open={!user} className={classes.modal}>
         <div>
+            {
+                console.log(cookies.get('name'))
+            }
             <Paper className={classes.container}>
             <Grid
               container
