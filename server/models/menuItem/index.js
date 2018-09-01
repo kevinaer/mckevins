@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const CATEGORY = ['main', 'sides'];
+const CATEGORY = ['main', 'sides', 'drinks', 'desserts'];
 
 const MenuItemSchema = new Schema({
+    _id: String,
     name: String,
     description: String,
     category: {
@@ -17,6 +18,10 @@ const MenuItemSchema = new Schema({
         name: String,
         options: [String],
     }],
+    disabled: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 module.exports = mongoose.model('MenuItem', MenuItemSchema);

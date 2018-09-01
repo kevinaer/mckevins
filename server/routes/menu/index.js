@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/menuItem', (req, res) => {
     menuItem.create({
+        _id: req.body.id,
         name: req.body.name,
         description: req.body.description,
         category: req.body.category,
@@ -17,6 +18,22 @@ router.post('/menuItem', (req, res) => {
             res.status(404).send('Cannot create menu item');
         }
     });
+});
+
+router.put('/menuItem/:id', (req, res) => {
+    menuItem.findByIdAndUpdate(
+        req.params.id,
+        {
+            $set: { ...req.body },
+        },
+        (err, object) => {
+            if (object) {
+                res.send(object);
+            } else {
+                res.status(404).send('Cannot update menu item');
+            }
+        },
+    );
 });
 
 router.get('/menu', (req, res) => {

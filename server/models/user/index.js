@@ -7,6 +7,7 @@ const UserSchema = new Schema({
     _id: Number,
     url: String,
     accessToken: String,
+    isAdmin: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model('User', UserSchema);

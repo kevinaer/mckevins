@@ -1,6 +1,8 @@
+
 import React, { Component } from 'react';
+import { withCookies, Cookies } from 'react-cookie';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import PropTypes, { instanceOf } from 'prop-types';
 import { Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -32,7 +34,13 @@ class Menu extends Component {
 
     renderCategory(category) {
         const { menu } = this.props;
-
+        if (!menu.length) {
+            return (
+                <Typography variant="subheading">
+                    No items currently exist
+                </Typography>
+            );
+        }
         return menu.filter(item => item.category === category)
             .map(item => (
                 <MenuItem
@@ -64,10 +72,10 @@ class Menu extends Component {
     }
 
     render() {
-        const { classes, menuLoaded } = this.props;
+        const { classes, menuLoaded, cookies } = this.props;
         return (
             <div>
-                <LoginModal />
+                {!cookies.get('id') && (<LoginModal />)}
                 <div className={classes.menu}>
                     {
                         menuLoaded && this.renderMenuItems()
@@ -88,6 +96,7 @@ Menu.propTypes = {
         category: PropTypes.string,
         imageUrl: PropTypes.string,
     }).isRequired,
+    cookies: instanceOf(Cookies).isRequired,
     menuLoaded: PropTypes.bool.isRequired,
     onGetMenu: PropTypes.func.isRequired,
 };
@@ -106,4 +115,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Menu));
+export default connect(mapStateToProps, mapDispatchToProps)(withCookies(withStyles(styles)(Menu)));

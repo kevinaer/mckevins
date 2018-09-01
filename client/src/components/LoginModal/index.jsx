@@ -34,9 +34,6 @@ const LoginModal = ({
 }) => (
     <Modal open={!user} className={classes.modal}>
         <div>
-            {
-                console.log(cookies.get('name'))
-            }
             <Paper className={classes.container}>
             <Grid
               container
@@ -54,7 +51,12 @@ const LoginModal = ({
                       appId="371809906684685"
                       autoLoad={false}
                       fields="name,picture"
-                      callback={onLoginWithFb}
+                      callback={data => (
+                          onLoginWithFb(data).then((res) => {
+                              cookies.set('name', res.data.name);
+                              cookies.set('id', res.data._id);
+                          })
+                      )}
                     />
                 </div>
                 <Button color="primary" variant="contained" className={classes.component}>
