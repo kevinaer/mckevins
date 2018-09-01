@@ -19,7 +19,7 @@ const styles = theme => ({
 });
 
 class UserCard extends React.Component {
-    propTypes = {
+    static propTypes = {
         onChangeAdminStatus: PropTypes.func.isRequired,
         id: PropTypes.func.isRequired,
         name: PropTypes.string.isRequired,

@@ -15,7 +15,6 @@ class Api {
         try {
             return fetch(`${this.URL}/${path}`, options)
                 .then(res => res.json())
-                .catch(error => dispatch({ type: this.API_ERROR, error }))
                 .then(data => dispatch({ type: this.API_SUCCESS, data }));
         } catch (error) {
             return dispatch({ type: this.API_ERROR, error });

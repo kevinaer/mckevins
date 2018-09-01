@@ -19,10 +19,6 @@ class Routes extends React.Component {
         onLoginWithFb: PropTypes.func.isRequired,
     }
 
-    defaultProps = {
-        user: null,
-    }
-
     render() {
         const { user, cookies, onLoginWithFb } = this.props;
         if (!user && cookies.get('id')) {
@@ -30,13 +26,13 @@ class Routes extends React.Component {
         }
         return (
             <div>
-                <NavBar />
+                <NavBar isAdmin={_.get(user, 'isAdmin', false)}/>
                 <Switch>
-                    <Route path="/menu" component={Menu} />
+                    <Route exact path="/" component={Menu} />                    
+                    <Route exact path="/menu" component={Menu} />
                     {_.get(user, 'isAdmin', false) === true && (
                         <Route path="/admin" exact component={Admin} />
                     )}
-                    <Route path="/" component={Menu} />
                 </Switch>
             </div>
         );

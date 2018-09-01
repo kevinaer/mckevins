@@ -1,5 +1,6 @@
 import React from 'react';
 import { withCookies, Cookies } from 'react-cookie';
+import { withRouter } from 'react-router-dom'
 import PropTypes, { instanceOf } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -9,6 +10,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Link from 'react-router-dom/Link';
+import Redirect from 'react-router-dom/Redirect';
 
 const styles = theme => ({
     root: {
@@ -41,8 +44,9 @@ class NavBar extends React.Component {
     }
 
     render() {
-        const { classes, cookies } = this.props;
+        const { classes, cookies, isAdmin, history } = this.props;
         const { anchorEl } = this.state;
+        console.log(this.props)
         return (
             <div className={classes.root}>
             <AppBar position="fixed" color="default">
@@ -68,6 +72,16 @@ class NavBar extends React.Component {
                                       onClose={this.handleClose}
                                     >
                                         <MenuItem onClick={this.logout}>Log Out</MenuItem>
+                                        {isAdmin && (
+                                            <MenuItem
+                                              onClick={() => {
+                                                  history.push('/admin');
+                                                  window.location.href = window.location.href;
+                                              }}
+                                            >
+                                                Admin Page
+                                            </MenuItem>
+                                        )}
                                     </Menu>
                                 </div>
                             )}
@@ -85,6 +99,7 @@ NavBar.propTypes = {
         root: PropTypes.string,
     }).isRequired,
     cookies: instanceOf(Cookies).isRequired,
+    isAdmin: PropTypes.bool.isRequired,
 };
 
-export default withCookies(withStyles(styles)(NavBar));
+export default withRouter(withCookies(withStyles(styles)(NavBar)));

@@ -39,7 +39,7 @@ const styles = theme => ({
 });
 
 class CreateItemModal extends React.Component {
-    propTypes = {
+    static propTypes = {
         item: PropTypes.object,
         onCreateMenuItem: PropTypes.func.isRequired,
         onUpdateMenuItem: PropTypes.func.isRequired,
