@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import { ButtonBase } from '@material-ui/core';
 
 const styles = theme => ({
     image: {
@@ -15,6 +16,11 @@ const styles = theme => ({
     heading: {
         margin: theme.spacing.unit * 2,
     },
+    container: {
+        width: '100%',
+        textAlign: 'left',
+        display: 'inline-block',
+    },
 });
 
 const MenuItem = ({
@@ -22,9 +28,11 @@ const MenuItem = ({
     description,
     image,
     classes,
+    onClick,
 }) => (
     <div>
-        <Card className={classes.container}>
+        <ButtonBase className={classes.container} onClick={onClick}>
+        <Card>
             <Grid container spacing={24}>
                 <Grid item xs={8}>
                     <CardContent>
@@ -48,6 +56,7 @@ const MenuItem = ({
                 </Grid>
             </Grid>
         </Card>
+        </ButtonBase>
     </div>
 );
 
@@ -59,6 +68,7 @@ MenuItem.propTypes = {
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
 };
 
 

@@ -6,12 +6,13 @@ import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 
+import usersApi from 'reducers/api/UsersReducers';
 import menuApi from 'reducers/api/MenuReducers';
 import loginApi from 'reducers/api/LoginReducers';
 import Routes from 'routes';
 import registerServiceWorker from './registerServiceWorker';
 
-const rootReducers = combineReducers({ menuApi, loginApi });
+const rootReducers = combineReducers({ menuApi, loginApi, usersApi });
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware));
 
 ReactDOM.render(

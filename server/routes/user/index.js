@@ -5,8 +5,8 @@ const Cookies = require('universal-cookie');
 const router = express.Router();
 
 router.post('/login', (req, res) => {
-    const cookies = new Cookies();
-    User.findById(req.body.id, (findErr, query) => {
+    User.findById(req.body.id, (err, query) => {
+        const cookies = new Cookies();
         if (query) {
             cookies.set('name', 'query', { path: '/', maxAge: 86400 });
             res.send(query);
@@ -24,6 +24,25 @@ router.post('/login', (req, res) => {
                     res.status(404).send('Cannot retrieve user');
                 }
             });
+        }
+    });
+});
+
+router.put('/user/admin', (req, res) => {
+    User.findByIdAndUpdate(req.body.id, { $set: { isAdmin: req.body.admin } }, (err, query) => {
+        if (err) {
+            res.status(500).send('Could not update user');
+        }
+        res.send(query);
+    });
+});
+
+router.get('/users', (req, res) => {
+    User.find({}, (err, query) => {
+        if (query) {
+            res.send(query);
+        } else {
+            res.status(404).send('Cannot retrieve users');
         }
     });
 });

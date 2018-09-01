@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "scripts": {
         "lint": "eslint --ext .jsx --ext .js -c .eslintrc.json server client",
+        "install": "npm install && cd client && npm install",
         "build": "npm install",
         "client": "cd client && npm run start",
         "server": "nodemon server.js",
@@ -18,6 +19,7 @@
     "dependencies": {
         "body-parser": "^1.18.3",
         "express": "^4.16.2",
+        "lodash": "^4.17.10",
         "module-alias": "^2.1.0",
         "mongoose": "^5.2.6",
         "react-facebook-login": "^4.0.1",

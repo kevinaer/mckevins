@@ -23,12 +23,24 @@
             { "ignoredNodes": ["JSXElement *"] }
         ],
         "linebreak-style": [
-            "error",
+            "off",
             "unix"
+        ],
+        "no-underscore-dangle": "off",
+        "no-unneeded-ternary": [
+            "error",
+            { "defaultAssignment": true }
         ],
         "quotes": [
             "error",
             "single"
+        ],
+        "react/forbid-prop-types": "warn",
+        "react/prefer-stateless-function": [
+            "warn"
+        ],
+        "react/jsx-one-expression-per-line": [
+            "off"
         ],
         "react/jsx-indent": "off",
         "react/jsx-filename-extension": [
