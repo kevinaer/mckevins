@@ -1,7 +1,8 @@
 import React from 'react';
+import { withCookies, Cookies } from 'react-cookie';
 import FacebookLogin from 'react-facebook-login';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import PropTypes, { instanceOf } from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -25,9 +26,17 @@ const styles = theme => ({
     },
 });
 
-const LoginModal = ({ classes, onLoginWithFb, user }) => (
+const LoginModal = ({
+    classes,
+    onLoginWithFb,
+    user,
+    cookies,
+}) => (
     <Modal open={!user} className={classes.modal}>
         <div>
+            {
+                console.log(cookies.get('name'))
+            }
             <Paper className={classes.container}>
             <Grid
               container
@@ -68,6 +77,7 @@ LoginModal.propTypes = {
         name: PropTypes.string,
         url: PropTypes.string,
     }),
+    cookies: instanceOf(Cookies).isRequired,
 };
 
 LoginModal.defaultProps = {
@@ -85,4 +95,5 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(LoginModal));
+const styledLoginModal = withStyles(styles)(LoginModal);
+export default connect(mapStateToProps, mapDispatchToProps)(withCookies(styledLoginModal));

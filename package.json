@@ -20,7 +20,9 @@
         "express": "^4.16.2",
         "module-alias": "^2.1.0",
         "mongoose": "^5.2.6",
-        "react-facebook-login": "^4.0.1"
+        "react-facebook-login": "^4.0.1",
+        "universal-cookie": "^2.2.0",
+        "universal-cookie-express": "^2.2.0"
     },
     "devDependencies": {
         "babel-eslint": "^8.2.6",

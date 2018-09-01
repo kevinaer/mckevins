@@ -2,6 +2,7 @@
 require('module-alias/register');
 const path = require('path');
 const express = require('express');
+const cookiesMiddleware = require('universal-cookie-express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
@@ -9,6 +10,8 @@ const routes = require('server/routes');
 
 const app = express();
 const port = process.env.PORT || 5000;
+
+app.use(cookiesMiddleware());
 
 app.use(bodyParser.urlencoded({
     extended: true,
