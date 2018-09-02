@@ -25,7 +25,7 @@ class UserCard extends React.Component {
         name: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
         isAdmin: PropTypes.bool.isRequired,
-        classes: PropTypes.object,
+        classes: PropTypes.object.isRequired,
     }
 
     constructor(props) {

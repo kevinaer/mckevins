@@ -48,6 +48,10 @@ class CreateItemModal extends React.Component {
         open: PropTypes.bool.isRequired,
     }
 
+    static defaultProps = {
+        item: null,
+    }
+
     constructor(props) {
         super(props);
 

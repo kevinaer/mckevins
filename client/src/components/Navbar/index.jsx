@@ -1,6 +1,6 @@
 import React from 'react';
 import { withCookies, Cookies } from 'react-cookie';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import PropTypes, { instanceOf } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -10,8 +10,6 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Link from 'react-router-dom/Link';
-import Redirect from 'react-router-dom/Redirect';
 
 const styles = theme => ({
     root: {
@@ -44,9 +42,13 @@ class NavBar extends React.Component {
     }
 
     render() {
-        const { classes, cookies, isAdmin, history } = this.props;
+        const {
+            classes,
+            cookies,
+            isAdmin,
+            history,
+        } = this.props;
         const { anchorEl } = this.state;
-        console.log(this.props)
         return (
             <div className={classes.root}>
             <AppBar position="fixed" color="default">
@@ -100,6 +102,7 @@ NavBar.propTypes = {
     }).isRequired,
     cookies: instanceOf(Cookies).isRequired,
     isAdmin: PropTypes.bool.isRequired,
+    history: PropTypes.object.isRequired,
 };
 
 export default withRouter(withCookies(withStyles(styles)(NavBar)));
