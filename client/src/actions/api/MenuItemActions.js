@@ -8,6 +8,10 @@ class MenuItemApi extends Api {
     updateMenuItem(id, menuItem) {
         return this.put(`/${id}`, menuItem);
     }
+
+    getMenuItem(id) {
+        return this.get(`/${id}`);
+    }
 }
 
 export default new MenuItemApi('MENU_ITEM_API', 'api/menuItem');

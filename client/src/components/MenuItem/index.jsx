@@ -10,8 +10,7 @@ import { ButtonBase } from '@material-ui/core';
 
 const styles = theme => ({
     image: {
-        height: 0,
-        paddingTop: '50%',
+        textAlign: 'right',
     },
     heading: {
         margin: theme.spacing.unit * 2,
@@ -48,10 +47,11 @@ const MenuItem = ({
                     </CardContent>
                 </Grid>
                 <Grid item xs={4}>
-                    <CardMedia
-                      image={image}
-                      title={title}
-                      className={classes.image}
+                    <img
+                        src={image}
+                        height="200"
+                        width="200"
+                        className={classes.image}
                     />
                 </Grid>
             </Grid>

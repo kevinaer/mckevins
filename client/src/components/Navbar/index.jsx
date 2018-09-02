@@ -10,6 +10,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import _ from 'lodash';
 
 const styles = theme => ({
     root: {
@@ -47,6 +48,7 @@ class NavBar extends React.Component {
             cookies,
             isAdmin,
             history,
+            location,
         } = this.props;
         const { anchorEl } = this.state;
         return (
@@ -55,9 +57,23 @@ class NavBar extends React.Component {
                 <Toolbar>
                     <Grid container>
                         <Grid item xs={9} className={classes.title}>
-                            <Typography variant="title" color="inherit">
-                                {'McKevin\'s Menu'}
-                            </Typography>
+                            {(_.get(location, 'pathname') === '/menu' ||
+                              _.get(location, 'pathname') === '/') && (
+                                <Typography variant="title" color="inherit">
+                                    {'McKevin\'s Burgers and Fries'}
+                                </Typography>
+                            )}
+                            {!(_.get(location, 'pathname') === '/menu' ||
+                               _.get(location, 'pathname') === '/') && (
+                                <Button
+                                  onClick={() => {
+                                    history.push('/menu');
+                                    window.location.reload();
+                                  }}
+                                >
+                                    Back to Menu
+                                </Button>
+                            )}
                         </Grid>
                         <Grid item xs={3}>
                             {cookies.get('name') && (

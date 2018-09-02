@@ -20,6 +20,16 @@ router.post('/menuItem', (req, res) => {
     });
 });
 
+router.get('/menuItem/:id', (req, res) => {
+    menuItem.findById(req.params.id, (err, object) => {
+        if (object) {
+            res.send(object);
+        } else {
+            res.status(404).send('Could not find menu item');
+        }
+    });
+});
+
 router.put('/menuItem/:id', (req, res) => {
     menuItem.findByIdAndUpdate(
         req.params.id,

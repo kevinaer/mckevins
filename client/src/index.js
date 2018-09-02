@@ -8,11 +8,14 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 
 import usersApi from 'reducers/api/UsersReducers';
 import menuApi from 'reducers/api/MenuReducers';
+import menuItemApi from 'reducers/api/MenuItemReducers';
 import loginApi from 'reducers/api/LoginReducers';
+import orderApi from 'reducers/api/OrderReducers';
+import ordersApi from 'reducers/api/OrdersReducers';
 import Routes from 'routes';
 import registerServiceWorker from './registerServiceWorker';
 
-const rootReducers = combineReducers({ menuApi, loginApi, usersApi });
+const rootReducers = combineReducers({ menuApi, loginApi, usersApi, menuItemApi, orderApi, ordersApi });
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware));
 
 ReactDOM.render(

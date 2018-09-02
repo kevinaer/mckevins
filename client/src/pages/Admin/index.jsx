@@ -10,6 +10,7 @@ import Tab from '@material-ui/core/Tab';
 import { Typography, Button } from '@material-ui/core';
 
 import MenuApi from 'actions/api/MenuActions';
+import OrdersApi from 'actions/api/OrdersActions';
 import UsersApi from 'actions/api/UsersActions';
 import UserApi from 'actions/api/UserActions';
 import MenuItem from 'components/MenuItem';
@@ -56,9 +57,10 @@ class Admin extends Component {
     }
 
     componentDidMount() {
-        const { onGetAllUsers, onGetMenu } = this.props;
+        const { onGetAllUsers, onGetMenu, onGetAllOrders } = this.props;
         onGetAllUsers();
         onGetMenu();
+        onGetAllOrders();
     }
 
     renderCategory(category) {
@@ -190,6 +192,24 @@ class Admin extends Component {
         );
     }
 
+    renderOrders() {
+        const { orders } = this.props;
+        return (
+            <div>
+                <Typography
+                  variant="headline"
+                >
+                    In Progress Orders
+                </Typography>
+                <Typography
+                  variant="headline"
+                >
+                    Completed Orders
+                </Typography>
+            </div>
+        );
+    }
+
     render() {
         const { tab } = this.state;
         const { classes, cookies } = this.props;
@@ -206,11 +226,13 @@ class Admin extends Component {
                     >
                         <Tab label="Menu" />
                         <Tab label="Users" />
+                        <Tab label="Orders" />
                     </Tabs>
                 </AppBar>
                 <div className={classes.content}>
                     {tab === 0 && this.renderMenu()}
                     {tab === 1 && this.renderUsers()}
+                    {tab === 2 && this.renderOrders()}
                 </div>
             </div>
         );
@@ -221,14 +243,17 @@ const mapDispatchToProps = dispatch => ({
     onChangeAdminStatus: (id, admin) => dispatch(UserApi.changeAdminStatus(id, admin)),
     onGetAllUsers: () => dispatch(UsersApi.getAllUsers()),
     onGetMenu: () => dispatch(MenuApi.getMenu()),
+    onGetAllOrders: () => dispatch(OrdersApi.getAllOrders()),
 });
 
 const mapStateToProps = (state) => {
     const { users } = state.usersApi;
     const { menu } = state.menuApi;
+    const { orders } = state.ordersApi;
     return {
         menu,
         users,
+        orders,
     };
 };
 

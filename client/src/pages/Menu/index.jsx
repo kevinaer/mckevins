@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import { withCookies, Cookies } from 'react-cookie';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes, { instanceOf } from 'prop-types';
 import { Typography } from '@material-ui/core';
@@ -11,6 +12,9 @@ import LoginModal from 'components/LoginModal';
 import MenuItem from 'components/MenuItem';
 
 const styles = theme => ({
+    root: {
+        paddingBottom: theme.spacing.unit * 4,
+    },
     menu: {
         padding: theme.spacing.unit,
         marginTop: theme.mixins.toolbar.minHeight + theme.spacing.unit,
@@ -33,7 +37,7 @@ class Menu extends Component {
     }
 
     renderCategory(category) {
-        const { menu } = this.props;
+        const { menu, history } = this.props;
         if (!menu.length) {
             return (
                 <Typography variant="subheading">
@@ -47,6 +51,10 @@ class Menu extends Component {
                   title={item.name}
                   description={item.description}
                   image={item.imageUrl}
+                  onClick={() => {
+                      history.push(`/menu/${item._id}`);
+                      window.location.reload();
+                  }}
                 />
             ));
     }
@@ -67,6 +75,18 @@ class Menu extends Component {
                     </Typography>
                     {this.renderCategory('sides')}
                 </div>
+                <div className={classes.group}>
+                    <Typography variant="headline">
+                        Drinks
+                    </Typography>
+                    {this.renderCategory('drinks')}
+                </div>
+                <div className={classes.group}>
+                    <Typography variant="headline">
+                        Desserts
+                    </Typography>
+                    {this.renderCategory('desserts')}
+                </div>
             </div>
         );
     }
@@ -74,7 +94,7 @@ class Menu extends Component {
     render() {
         const { classes, menuLoaded, cookies } = this.props;
         return (
-            <div>
+            <div className={classes.root}>
                 {!cookies.get('id') && (<LoginModal />)}
                 <div className={classes.menu}>
                     {
@@ -115,4 +135,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withCookies(withStyles(styles)(Menu)));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withCookies(withStyles(styles)(Menu))));

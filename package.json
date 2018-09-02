@@ -23,7 +23,8 @@
         "mongoose": "^5.2.6",
         "react-facebook-login": "^4.0.1",
         "universal-cookie": "^2.2.0",
-        "universal-cookie-express": "^2.2.0"
+        "universal-cookie-express": "^2.2.0",
+        "uuid": "^3.3.2"
     },
     "devDependencies": {
         "babel-eslint": "^8.2.6",
