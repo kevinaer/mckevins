@@ -7,9 +7,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { Typography, Button } from '@material-ui/core';
+import { Typography, Button, Card, Divider } from '@material-ui/core';
+import _ from 'lodash'
 
 import MenuApi from 'actions/api/MenuActions';
+import OrderApi from 'actions/api/OrderActions';
 import OrdersApi from 'actions/api/OrdersActions';
 import UsersApi from 'actions/api/UsersActions';
 import UserApi from 'actions/api/UserActions';
@@ -32,6 +34,17 @@ const styles = theme => ({
     group: {
         marginBottom: theme.spacing.unit,
     },
+    image: {
+        borderRadius: theme.shape.borderRadius,
+        marginBottom: theme.spacing.unit,
+    },
+    order: {
+        textAlign: "center",
+        padding: theme.spacing.unit,
+    },
+    orderItem: {
+        marginBottom: theme.spacing.unit,
+    }
 });
 
 class Admin extends Component {
@@ -61,6 +74,25 @@ class Admin extends Component {
         onGetAllUsers();
         onGetMenu();
         onGetAllOrders();
+    }
+
+    componentDidUpdate(prevProps) {
+        const { orders, users } = this.props;
+
+        if (prevProps.orders !== orders) {
+            const placedOrders = orders.filter(order => order.status === 'placed');
+            const doneOrders = orders.filter(order => order.status === 'done');
+            this.setState({ placedOrders, doneOrders });
+        }
+        if (users !== prevProps.users) {
+            const mappedUsers = users.reduce((sum, user) => (
+                {...sum, [user._id]: {
+                    name: user.name,
+                    url: user.url,
+                }}
+            ), {});
+            this.setState({ mappedUsers });
+        }
     }
 
     renderCategory(category) {
@@ -193,7 +225,46 @@ class Admin extends Component {
     }
 
     renderOrders() {
-        const { orders } = this.props;
+        const { placedOrders, doneOrders, mappedUsers } = this.state;
+        const { classes, onFinishOrder } = this.props;
+
+        const OrderCard = (order, isDone=false) => (
+            <Grid item lg={3} md={4}>
+                <Card className={classes.order}>
+                    <Typography variant="title">
+                        {mappedUsers[order.userId].name}
+                    </Typography>
+                    <img
+                        src={mappedUsers[order.userId].url}
+                        title={mappedUsers[order.userId].name}
+                        className={classes.image}
+                        alt=""
+                    />
+                    {_.get(order, 'cart', []).map((item, key) => (
+                        <div className={classes.orderItem}>
+                            <Typography variant="subheading">{item.name}</Typography>
+                            {Object.keys(item.options).map(option => (
+                                <Typography>{`${option}: ${item.options[option]}`}</Typography>
+                            ))}
+                            <Typography>{`Special Instructions: ${item.instructions || 'None'}`}</Typography>
+                            <Divider />
+                        </div>
+                    ))}
+                    {!isDone && (
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={() => {
+                              onFinishOrder(order._id);
+                              window.location.reload();
+                          }}
+                        >
+                            Mark as complete
+                        </Button>
+                    )}
+                </Card>
+            </Grid>
+        )
         return (
             <div>
                 <Typography
@@ -201,11 +272,21 @@ class Admin extends Component {
                 >
                     In Progress Orders
                 </Typography>
+                {placedOrders && mappedUsers && (
+                    <Grid container spacing={8}>
+                        {placedOrders.map(order => OrderCard(order))}
+                    </Grid>
+                )}
                 <Typography
                   variant="headline"
                 >
                     Completed Orders
                 </Typography>
+                {doneOrders && mappedUsers && (
+                    <Grid container spacing={8}>
+                        {doneOrders.map(order => OrderCard(order, true))}
+                    </Grid>
+                )}
             </div>
         );
     }
@@ -244,6 +325,7 @@ const mapDispatchToProps = dispatch => ({
     onGetAllUsers: () => dispatch(UsersApi.getAllUsers()),
     onGetMenu: () => dispatch(MenuApi.getMenu()),
     onGetAllOrders: () => dispatch(OrdersApi.getAllOrders()),
+    onFinishOrder: orderId => dispatch(OrderApi.finishOrder(orderId)),
 });
 
 const mapStateToProps = (state) => {
