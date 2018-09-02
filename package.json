@@ -3,7 +3,6 @@
     "version": "1.0.0",
     "scripts": {
         "lint": "eslint --ext .jsx --ext .js -c .eslintrc.json server client",
-        "install": "npm install && cd client && npm install",
         "build": "npm install",
         "client": "cd client && npm run start",
         "server": "nodemon server.js",
