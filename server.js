@@ -25,7 +25,7 @@ let mongoDB;
 if (process.env.NODE_ENV === 'production') {
     const mongoUser = process.env.MONGODB_USER;
     const mongoPassword = process.env.MONGODB_PASSWORD;
-    mongoDB = `mongodb://${mongoUser}:${mongoPassword}@ds215172.mlab.com:15172/mckevins`;
+    mongoDB = process.env.MONGODB_URI;
 } else {
     mongoDB = 'mongodb://127.0.0.1/mckevins';
 }
