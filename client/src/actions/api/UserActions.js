@@ -2,7 +2,7 @@ import Api from 'actions/Api';
 
 class UserApi extends Api {
     changeAdminStatus(id, admin) {
-        return this.post('/admin', { id, admin });
+        return this.post('admin', { id, admin });
     }
 }
 

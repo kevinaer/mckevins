@@ -12,14 +12,18 @@ class Api {
 
     async request(path = '', options, dispatch) {
         dispatch({ type: this.API_PENDING });
-        try {
-            return fetch(`/${this.URL}/${path}`, options)
-                .then(res => res.json())
-                .catch(error => dispatch({ type: this.API_ERROR, error }))
-                .then(data => dispatch({ type: this.API_SUCCESS, data }));
-        } catch (error) {
-            return dispatch({ type: this.API_ERROR, error });
-        }
+        return fetch(`/${this.URL}/${path}`, options)
+            .then(res => {
+                try {
+                    return res.json()
+                    .then(data => dispatch({ type: this.API_SUCCESS, data }))
+                } catch (error) {
+                    throw error
+                }
+            })
+            .catch(error => {
+                return dispatch({ type: this.API_ERROR, error });
+            });
     }
 
     get(path) {

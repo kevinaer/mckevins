@@ -6,11 +6,11 @@ class MenuItemApi extends Api {
     }
 
     updateMenuItem(id, menuItem) {
-        return this.post(`/${id}`, menuItem);
+        return this.post(`${id}`, menuItem);
     }
 
     getMenuItem(id) {
-        return this.get(`/${id}`);
+        return this.get(`${id}`);
     }
 }
 

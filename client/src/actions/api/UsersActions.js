@@ -2,7 +2,7 @@ import Api from 'actions/Api';
 
 class UsersApi extends Api {
     getAllUsers() {
-        return this.get();
+        return this.get('');
     }
 }
 

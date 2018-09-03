@@ -13,6 +13,10 @@ const styles = theme => ({
         padding: theme.spacing.unit,
         marginTop: theme.mixins.toolbar.minHeight + theme.spacing.unit,
     },
+    option: {
+        display: 'block',
+        paddingTop: theme.spacing.unit,
+    },
     image: {
         borderRadius: theme.shape.borderRadius,
     },
@@ -35,13 +39,18 @@ class MenuItem extends Component {
     componentDidMount() {
         const { onGetMenuItem } = this.props;
         const { id } = this.props.match.params;
-        onGetMenuItem(id).then(({ data }) => {
-            const options = data.ingredients.reduce((sum, iter) => (
+        onGetMenuItem(id);
+    }
+
+    onComponentDidUpdate(prevProps) {
+        const { menuItem } = this.props;
+
+        if (menuItem && menuItem !== prevProps.menuItem) {
+            const options = menuItem.ingredients.reduce((sum, iter) => (
                 {...sum, [iter.name]: iter.options[0] }
             ), {});
             this.setState({ options });
-        });
-        
+        }
     }
 
     onSubmit() {
@@ -64,7 +73,7 @@ class MenuItem extends Component {
 
     renderOptions() {
         const { options } = this.state;
-        const { menuItem } = this.props;
+        const { menuItem, classes } = this.props;
         return (
             <div>
                 <Divider/>
@@ -72,7 +81,7 @@ class MenuItem extends Component {
                     <Typography variant="subheading">Options</Typography>
                 )}
                 {menuItem.ingredients.map(ingredient => (
-                    <FormControl>
+                    <FormControl className={classes.option}>
                         <FormLabel>{ingredient.name}</FormLabel>
                         <RadioGroup
                           aria-label={ingredient.name}
