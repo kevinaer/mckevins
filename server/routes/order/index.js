@@ -38,37 +38,13 @@ router.get('/order/cart/:userId', (req, res) => {
     });
 });
 
-router.put('/order/cart/:userId', (req, res) => {
-    order.findOne({
-        userId: req.params.userId,
-        status: 'cart',
-    }, (err, cart) => {
-        if (cart) {
-            cart.cart = req.body.cart;
-            order.updateOne({ _id: cart._id }, { cart: cart.cart }, (err, updated) => {
-                if (updated) {
-                    res.send(cart);
-                } else {
-                    res.status(404).send('Could not update cart');
-                }
-            })
-        } else {
-            res.status(404).send('Could not add to cart');
-        }
-    });
-});
-
 router.post('/order/cart/:userId', (req, res) => {
     order.findOne({
         userId: req.params.userId,
         status: 'cart',
     }, (err, cart) => {
         if (cart) {
-            cart.cart.push({
-                name: req.body.name,
-                options: req.body.options,
-                instructions: req.body.instructions,
-            });
+            cart.cart = req.body.cart;
             order.updateOne({ _id: cart._id }, { cart: cart.cart }, (err, updated) => {
                 if (updated) {
                     res.send(cart);

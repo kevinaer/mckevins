@@ -5,7 +5,7 @@ class OrderApi extends Api {
         return this.get(`/cart/${userId}`);
     }
     updateCart(userId, cart) {
-        return this.put(`/cart/${userId}`, { cart });
+        return this.post(`/cart/${userId}`, { cart });
     }
     placeOrder(userId) {
         return this.post(`/cart/${userId}/place`);

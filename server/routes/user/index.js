@@ -33,7 +33,7 @@ router.post('/login', (req, res) => {
     
 });
 
-router.put('/user/admin', (req, res) => {
+router.post('/user/admin', (req, res) => {
     User.findByIdAndUpdate(req.body.id, { $set: { isAdmin: req.body.admin } }, (err, query) => {
         if (err) {
             res.status(500).send('Could not update user');

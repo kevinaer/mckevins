@@ -30,7 +30,7 @@ router.get('/menuItem/:id', (req, res) => {
     });
 });
 
-router.put('/menuItem/:id', (req, res) => {
+router.post('/menuItem/:id', (req, res) => {
     menuItem.findByIdAndUpdate(
         req.params.id,
         {
