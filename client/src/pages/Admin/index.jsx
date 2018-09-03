@@ -239,6 +239,8 @@ class Admin extends Component {
                         title={mappedUsers[order.userId].name}
                         className={classes.image}
                         alt=""
+                        width="200"
+                        height="200"
                     />
                     {_.get(order, 'cart', []).map((item, key) => (
                         <div className={classes.orderItem}>

@@ -14,7 +14,7 @@ router.post('/login', (req, res) => {
             User.create({
                 name: req.body.name,
                 _id: req.body.id,
-                url: `https://graph.facebook.com/${req.body.id}/picture?type=large`,
+                url: req.body.url || `https://graph.facebook.com/${req.body.id}/picture?type=large`,
                 accessToken: req.body.accessToken,
             }, (createErr, object) => {
                 if (object) {

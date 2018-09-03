@@ -75,6 +75,8 @@ class UserCard extends React.Component {
                       title={name}
                       className={classes.image}
                       alt=""
+                      width="200"
+                      height="200"
                     />
                     {isAdmin && (
                         <CardContent>

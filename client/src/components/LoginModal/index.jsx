@@ -9,8 +9,10 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
+import uuidv1 from 'uuid/v1';
 
 import LoginApi from 'actions/api/LoginActions';
+import { TextField } from '@material-ui/core';
 
 const styles = theme => ({
     modal: {
@@ -26,47 +28,95 @@ const styles = theme => ({
     },
 });
 
-const LoginModal = ({
-    classes,
-    onLoginWithFb,
-    user,
-    cookies,
-}) => (
-    <Modal open={!user} className={classes.modal}>
-        <div>
-            <Paper className={classes.container}>
-            <Grid
-              container
-              direction="column"
-              justify="center"
-              alignItems="center"
-            >
-                <div className={classes.component}>
-                    <Typography variant="title" id="modal-title">
-                        Login
-                    </Typography>
+class LoginModal extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
+    render() {
+        const {
+            classes,
+            onLoginWithFb,
+            user,
+            cookies,
+        } = this.props;
+        const { asGuest, name } = this.state;
+        return (
+            <Modal open={!user} className={classes.modal}>
+                <div>
+                    <Paper className={classes.container}>
+                    <Grid
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="center"
+                    >
+                        <div className={classes.component}>
+                            <Typography variant="title" id="modal-title">
+                                Login
+                            </Typography>
+                        </div>
+                        <div className={classes.component}>
+                            <FacebookLogin
+                            appId="371809906684685"
+                            autoLoad={false}
+                            fields="name,picture"
+                            callback={data => (
+                                onLoginWithFb(data).then((res) => {
+                                    if (res.data) {
+                                        cookies.set('name', res.data.name);
+                                        cookies.set('id', res.data._id);
+                                    }   
+                                })
+                            )}
+                            />
+                        </div>
+                        {!asGuest && (
+                            <Button
+                              color="primary"
+                              variant="contained"
+                              className={classes.component}
+                              onClick={() => this.setState({asGuest: true})}
+                            >
+                                Login as Guest
+                            </Button>
+                        )}
+                        {asGuest && (
+                            <div>
+                                <TextField
+                                    id="name"
+                                    label="Name"
+                                    value={name}
+                                    onChange={({ target }) => this.setState({ name: target.value })}
+                                />
+                                <Button
+                                    color="primary"
+                                    variant="contained"
+                                    className={classes.component}
+                                    onClick={() => onLoginWithFb({
+                                        name,
+                                        id: uuidv1(),
+                                        url: `https://robohash.org/${name.r}`,
+                                    }).then((res) => {
+                                        if (res.data) {
+                                            cookies.set('name', res.data.name);
+                                            cookies.set('id', res.data._id);
+                                        }
+                                    })}
+                                >
+                                    Submit
+                                </Button>
+                            </div>
+                        )}
+                        
+                    </Grid>
+                    </Paper>
                 </div>
-                <div className={classes.component}>
-                    <FacebookLogin
-                      appId="371809906684685"
-                      autoLoad={false}
-                      fields="name,picture"
-                      callback={data => (
-                          onLoginWithFb(data).then((res) => {
-                              cookies.set('name', res.data.name);
-                              cookies.set('id', res.data._id);
-                          })
-                      )}
-                    />
-                </div>
-                <Button color="primary" variant="contained" className={classes.component}>
-                    Login as Guest
-                </Button>
-            </Grid>
-            </Paper>
-        </div>
-    </Modal>
-);
+            </Modal>
+        )
+    }
+}
 
 LoginModal.propTypes = {
     classes: PropTypes.shape({
