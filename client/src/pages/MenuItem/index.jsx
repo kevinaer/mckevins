@@ -11,6 +11,7 @@ import { Typography, FormControl, FormLabel, Divider, RadioGroup, FormControlLab
 const styles = theme => ({
     item: {
         padding: theme.spacing.unit,
+        paddingBottom: theme.spacing.unit * 4,
         marginTop: theme.mixins.toolbar.minHeight + theme.spacing.unit,
     },
     option: {

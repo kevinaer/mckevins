@@ -74,7 +74,7 @@ router.post('/order/cart/:userId/place', (req, res) => {
 
 router.post('/order/:orderId/done', (req, res) => {
     order.findOneAndUpdate(
-        { _id: req.params.orderId, status: 'placed' },
+        { _id: req.params.orderId },
         { $set: { status: 'done' } },
         (err, cart) => {
             if (cart) {
