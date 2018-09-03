@@ -33,7 +33,7 @@ const MenuItem = ({
         <ButtonBase className={classes.container} onClick={onClick}>
         <Card>
             <Grid container spacing={24}>
-                <Grid item xs={8}>
+                <Grid item xs={6} md={8}>
                     <CardContent>
                         <Typography
                           variant="headline"
@@ -46,7 +46,7 @@ const MenuItem = ({
                         </Typography>
                     </CardContent>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={6} md={4}>
                     <img
                         src={image}
                         height="200"
